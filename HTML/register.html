@@ -36,7 +36,7 @@
                 <form id="authForm" class="mt-6 space-y-4">
                     <div class="space-y-1">
                         <label class="text-sm text-zinc-300">Cédula</label>
-                        <input class="input-dark" type="text" name="id_number"
+                        <input class="input-dark" type="text" name="id_number" id="id_number"
                             required placeholder="12345678" /> <p
                             class="text-xs text-zinc-500">
                             Ingrese su número de identificación.
@@ -46,28 +46,17 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div class="space-y-1">
                             <label class="text-sm text-zinc-300">Nombre</label>
-                            <input class="input-dark" type="text" name="name"
-                                required placeholder="Emily" />
+                            <input class="input-dark" type="text" name="name" id="name" readonly
+                                placeholder="Emily" />
                         </div>
 
                         <div class="space-y-1">
                             <label
                                 class="text-sm text-zinc-300">Apellido</label>
                             <input class="input-dark" type="text"
-                                name="last_name" required
+                                name="last_name" id="last_name" readonly
                                 placeholder="Zuniga"/>
                         </div>
-                    </div>
-
-                    <div class="space-y-1">
-                        <label class="text-sm text-zinc-300">Fecha de
-                            Nacimiento</label>
-                        <input class="input-dark" type="date" name="birthdate"
-                            required />
-                        <p class="text-xs text-zinc-500">
-                            Usamos esta información para personalizar tu
-                            experiencia.
-                        </p>
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -104,5 +93,6 @@
 
         <script src="../JS/API/auth.js"></script>
         <script src="../JS/auth.js"></script>
+        <script src="../JS/API/padron.js"></script>
     </body>
 </html>
