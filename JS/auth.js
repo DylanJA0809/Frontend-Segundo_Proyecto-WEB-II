@@ -20,6 +20,32 @@ document.addEventListener("DOMContentLoaded", () => {
   function isValidEmail(email) {
     return /^\S+@\S+\.\S+$/.test(email);
   }
+  
+  // Autocompletar desde padrón
+  const cedulaInput = document.getElementById('id_number');
+  const nameInput = document.getElementById('name');
+  const lastNameInput = document.getElementById('last_name');
+
+  if (cedulaInput) {
+    cedulaInput.addEventListener('blur', async () => {
+      const cedula = cedulaInput.value.trim();
+
+      if (!cedula) return;
+
+      try {
+        const data = await getPadronByCedula(cedula);
+
+        if (nameInput) nameInput.value = data.name;
+        if (lastNameInput) lastNameInput.value = data.last_name;
+
+      } catch (error) {
+        if (nameInput) nameInput.value = "";
+        if (lastNameInput) lastNameInput.value = "";
+
+        showMessage("error", error.message);
+      }
+    });
+  }
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -65,7 +91,6 @@ document.addEventListener("DOMContentLoaded", () => {
           id_number: form.id_number.value.trim(),
           name: form.name.value.trim(),
           last_name: form.last_name.value.trim(),
-          birthdate: form.birthdate.value,
           email: form.email.value.trim(),
           password: form.password.value.trim(),
         };
