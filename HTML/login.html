@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>TicoAutos | Inicio de Sesión</title>
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../css/auth.css" />
+</head>
+
+<body class="auth-bg min-h-screen">
+  <main class="relative z-10 min-h-screen flex items-center justify-center px-4 py-10">
+    <section id="authCard"
+      class="pop-in w-full max-w-md rounded-3xl backdrop-blur border border-zinc-800 p-7 card-glow"
+      style="background: var(--card);">
+
+      <!-- Logo -->
+      <div class="logo-wrap">
+        <img class="logo-img" src="../img/ticoautos-logo.png" alt="TicoAutos Logo" />
+        <div>
+          <h1 class="text-xl font-semibold tracking-wide">
+            <span class="text-red-500">Tico</span>Autos
+          </h1>
+          <p class="text-sm text-zinc-400">Inicia sesión para continuar</p>
+        </div>
+      </div>
+
+      <div id="msgBox" class="msg"></div>
+
+      <!-- Form -->
+      <form id="authForm" class="mt-6 space-y-4">
+        <div class="space-y-1">
+          <label class="text-sm text-zinc-300">Usuario</label>
+          <input class="input-dark" type="email" name="email" required placeholder="nombre@ejemplo.com" />
+          <p class="text-xs text-zinc-500">Usa el correo electrónico con el que te registraste.</p>
+        </div>
+
+        <div class="space-y-1">
+          <label class="text-sm text-zinc-300">Contraseña</label>
+          <input class="input-dark" type="password" name="password" required placeholder="••••••••" />
+        </div>
+
+        <button id="submitBtn"
+          class="w-full rounded-2xl bg-red-600 hover:bg-red-500 transition px-4 py-3 font-semibold">
+          Iniciar Sesión
+        </button>
+
+        <div class="flex items-center justify-between text-sm text-zinc-400">
+          <a class="hover:text-zinc-200" href="#">¿Olvidaste tu contraseña?</a>
+          <a class="hover:text-red-400" href="./register.html">Crear cuenta</a>
+        </div>
+      </form>
+
+      <p class="mt-6 text-xs text-zinc-500">
+        Al continuar, aceptas nuestros Términos y Política de Privacidad.
+      </p>
+    </section>
+  </main>
+  
+  <script src="../JS/API/auth.js"></script>
+  <script src="../JS/auth.js"></script>
+</body>
+</html>

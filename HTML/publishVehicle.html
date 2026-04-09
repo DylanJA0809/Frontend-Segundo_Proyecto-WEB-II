@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TicoAutos | Publicar Vehículo</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../css/publishVehicle.css" />
+</head>
+<body class="bg-black text-white min-h-screen">
+
+  <header class="sticky top-0 z-50 border-b border-zinc-800 bg-black/85 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between gap-4 flex-wrap">
+      <div class="flex items-center gap-3">
+        <img src="../img/ticoautos-logo.png" alt="Logo TicoAutos" class="w-28 h-auto" />
+        <div>
+          <h1 class="text-2xl md:text-3xl font-bold tracking-wide">
+            <span class="text-red-500">Publicar</span> Vehículo
+          </h1>
+          <p class="text-sm text-zinc-400">Ingresa la información de tu vehículo</p>
+        </div>
+      </div>
+
+      <a href="./index.html"
+        class="px-4 py-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 transition font-semibold">
+        Volver
+      </a>
+    </div>
+  </header>
+
+  <main class="max-w-5xl mx-auto px-4 py-8">
+    <section class="form-card fade-in p-6 lg:p-8">
+      <div class="mb-8">
+        <h2 class="text-2xl font-bold text-white">Nuevo vehículo</h2>
+        <p class="text-zinc-400 mt-2">Completa el formulario para publicar un vehículo en TicoAutos.</p>
+      </div>
+
+      <form id="publishVehicleForm" class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div class="field-box">
+          <label for="brand" class="label-small">Marca</label>
+          <input type="text" id="brand" class="form-input" placeholder="Ejemplo: Toyota" />
+        </div>
+
+        <div class="field-box">
+          <label for="model" class="label-small">Modelo</label>
+          <input type="text" id="model" class="form-input" placeholder="Ejemplo: Corolla" />
+        </div>
+
+        <div class="field-box">
+          <label for="year" class="label-small">Año</label>
+          <input type="number" id="year" class="form-input" placeholder="Ejemplo: 2020" />
+        </div>
+
+        <div class="field-box">
+          <label for="price" class="label-small">Precio</label>
+          <input type="number" id="price" class="form-input" placeholder="Ejemplo: 12000" />
+        </div>
+
+        <div class="field-box md:col-span-2">
+          <label for="description" class="label-small">Descripción</label>
+          <textarea id="description" class="form-input form-textarea" placeholder="Describe el vehículo"></textarea>
+        </div>
+
+        <div class="field-box md:col-span-2">
+          <label for="image" class="label-small">Imagen</label>
+          <input type="file" id="image" class="form-input" accept="image/*" />
+        </div>
+
+        <div class="field-box md:col-span-2">
+          <label class="label-small">Vista previa</label>
+          <div class="preview-box">
+            <img
+              id="imagePreview"
+              src="../img/default-car.jpg"
+              alt="Vista previa del vehículo"
+              class="preview-image"
+            />
+          </div>
+        </div>
+
+        <div class="md:col-span-2 flex flex-col sm:flex-row gap-3 mt-2">
+          <button type="submit"
+            class="w-full sm:w-auto px-5 py-3 rounded-xl bg-red-600 hover:bg-red-500 transition font-semibold">
+            Publicar vehículo
+          </button>
+
+          <button type="button" id="clearFormBtn"
+            class="w-full sm:w-auto px-5 py-3 rounded-xl bg-zinc-800 hover:bg-zinc-700 transition font-semibold">
+            Limpiar
+          </button>
+        </div>
+
+        <p id="formMessage" class="md:col-span-2 text-sm text-zinc-400 mt-2"></p>
+      </form>
+    </section>
+  </main>
+
+  <script src="../JS/API/publishVehicle.js"></script>
+  <script src="../JS/publishVehicle.js"></script>
+</body>
+</html>

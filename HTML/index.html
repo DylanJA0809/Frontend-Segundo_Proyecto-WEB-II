@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TicoAutos | Inicio</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../CSS/home.css" />
+</head>
+<body class="bg-black text-white min-h-screen">
+
+  <header class="sticky top-0 z-50 border-b border-zinc-800 bg-black/85 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between gap-4 flex-wrap">
+      
+      <div class="flex items-center gap-3">
+        <img src="../img/ticoautos-logo.png" alt="Logo TicoAutos" class="w-28 h-auto logo-float" />
+      </div>
+
+      <nav class="flex items-center gap-3 flex-wrap">
+        <a href="./index.html" class="nav-link active-link">Inicio</a>
+        <a href="./searchVehicles.html" class="nav-link">Ver vehículos</a>
+        <a href="./publishVehicle.html">
+          <button id="publishBtn" class="nav-link nav-button">Publicar un vehículo</button>
+        </a>
+        <a href="./myVehicles.html" id="myVehiclesNavBtn" class="nav-link hidden">
+          Mis vehículos
+        </a>
+        <a href="./login.html" id="loginNavBtn" class="nav-link nav-login">Iniciar sesión</a>
+         <button id="logoutBtn" class="nav-link hidden">Cerrar sesión</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero-section">
+      <div class="max-w-7xl mx-auto px-4 py-16 lg:py-24 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+        
+        <div class="fade-left">
+          <p class="text-red-500 font-semibold uppercase tracking-[0.2em] text-sm mb-4">
+            TicoAutos
+          </p>
+
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
+            Encontrá tu próximo
+            <span class="text-red-500">vehículo ideal</span>
+          </h1>
+
+          <p class="text-zinc-400 text-lg mt-6 max-w-xl">
+            Explorá vehículos disponibles, consultá sus detalles y encontrá la opción perfecta para vos.
+            Publicá tu vehículo de forma rápida y sencilla dentro de TicoAutos.
+          </p>
+
+          <div class="mt-8 flex flex-col sm:flex-row gap-4">
+            <a href="./searchVehicles.html" class="primary-btn">
+              Ver vehículos
+            </a>
+
+            <a href="./publishVehicle.html">
+              <button id="heroPublishBtn" class="secondary-btn">
+                Publicar un vehículo
+              </button>
+            </a>
+          </div>
+
+          <div class="mt-8 flex items-center gap-4 flex-wrap">
+            <div class="info-pill">Búsqueda pública</div>
+            <div class="info-pill">Filtros avanzados</div>
+            <div class="info-pill">Detalle completo</div>
+          </div>
+        </div>
+
+        <div class="fade-right">
+          <div class="hero-card">
+            <img
+              src="../img/home-car.jpg"
+              alt="Vehículo principal"
+              class="hero-image"
+              onerror="this.onerror=null; this.src='../img/default-car.jpg'"
+            />
+            <div class="hero-card-overlay">
+              <span class="status-chip">Disponible</span>
+              <h2 class="text-2xl font-bold mt-3">Tu próximo carro te está esperando</h2>
+              <p class="text-zinc-300 mt-2">
+                Explorá modelos, compará opciones y accedé al detalle de cada vehículo en segundos.
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="max-w-7xl mx-auto px-4 pb-16">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        <article class="feature-card fade-up">
+          <h3 class="text-xl font-semibold mt-4">Busca fácilmente</h3>
+          <p class="text-zinc-400 mt-3">
+            Filtrá por marca, modelo, año, precio, para encontrar exactamente lo que necesitás.
+          </p>
+        </article>
+
+        <article class="feature-card fade-up delay-1">
+          <h3 class="text-xl font-semibold mt-4">Explora detalles</h3>
+          <p class="text-zinc-400 mt-3">
+            Consultá la información completa del vehículo y visualiza sus datos de forma clara y ordenada.
+          </p>
+        </article>
+
+        <article class="feature-card fade-up delay-2">
+          <h3 class="text-xl font-semibold mt-4">Publica tu vehículo</h3>
+          <p class="text-zinc-400 mt-3">
+            Iniciá sesión y publicá tu vehículo para que otros usuarios puedan verlo y contactarte.
+          </p>
+        </article>
+
+      </div>
+    </section>
+
+    <section class="max-w-7xl mx-auto px-4 pb-20">
+      <div class="cta-box fade-up">
+        <div>
+          <h2 class="text-3xl font-bold">Comenzá ahora en TicoAutos</h2>
+          <p class="text-zinc-400 mt-3">
+            Explora el catálogo de vehículos o inicia sesión para publicar el tuyo.
+          </p>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-3">
+          <a href="./searchVehicles.html" class="primary-btn">
+            Ver vehículos
+          </a>
+          <a href="./login.html" class="secondary-btn">
+            Iniciar sesión
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="../JS/home.js"></script>
+</body>
+</html>

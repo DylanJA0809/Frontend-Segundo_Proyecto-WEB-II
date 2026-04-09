@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <title>TicoAutos | Registro</title>
+
+        <!-- Tailwind CDN -->
+        <script src="https://cdn.tailwindcss.com"></script>
+
+        <link rel="stylesheet" href="../css/auth.css" />
+    </head>
+
+    <body class="auth-bg min-h-screen">
+        <main
+            class="relative z-10 min-h-screen flex items-center justify-center px-4 py-10">
+            <section id="authCard"
+                class="pop-in w-full max-w-xl rounded-3xl backdrop-blur border border-zinc-800 p-7 card-glow"
+                style="background: var(--card);">
+
+                <!-- Logo -->
+                <div class="logo-wrap">
+                    <img class="logo-img" src="../img/ticoautos-logo.png"
+                        alt="TicoAutos Logo" />
+                    <div>
+                        <h1 class="text-xl font-semibold tracking-wide">
+                            <span class="text-red-500">Tico</span>Autos
+                        </h1>
+                        <p class="text-sm text-zinc-400">Crea tu cuenta</p>
+                    </div>
+                </div>
+
+                <div id="msgBox" class="msg"></div>
+
+                <!-- Form -->
+                <form id="authForm" class="mt-6 space-y-4">
+                    <div class="space-y-1">
+                        <label class="text-sm text-zinc-300">Cédula</label>
+                        <input class="input-dark" type="text" name="id_number"
+                            required placeholder="12345678" /> <p
+                            class="text-xs text-zinc-500">
+                            Ingrese su número de identificación.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="space-y-1">
+                            <label class="text-sm text-zinc-300">Nombre</label>
+                            <input class="input-dark" type="text" name="name"
+                                required placeholder="Emily" />
+                        </div>
+
+                        <div class="space-y-1">
+                            <label
+                                class="text-sm text-zinc-300">Apellido</label>
+                            <input class="input-dark" type="text"
+                                name="last_name" required
+                                placeholder="Zuniga"/>
+                        </div>
+                    </div>
+
+                    <div class="space-y-1">
+                        <label class="text-sm text-zinc-300">Fecha de
+                            Nacimiento</label>
+                        <input class="input-dark" type="date" name="birthdate"
+                            required />
+                        <p class="text-xs text-zinc-500">
+                            Usamos esta información para personalizar tu
+                            experiencia.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="space-y-1">
+                            <label class="text-sm text-zinc-300">Email</label>
+                            <input class="input-dark" type="email" name="email"
+                                required placeholder="nombre@ejemplo.com" />
+                        </div>
+
+                        <div class="space-y-1">
+                            <label
+                                class="text-sm text-zinc-300">Contraseña</label>
+                            <input class="input-dark" type="password"
+                                name="password" required
+                                placeholder="••••••••" />
+                        </div>
+                    </div>
+
+                    <button id="submitBtn"
+                        class="w-full rounded-2xl bg-red-600 hover:bg-red-500 transition px-4 py-3 font-semibold">
+                        Crear Cuenta
+                    </button>
+
+                    <div
+                        class="flex items-center justify-between text-sm text-zinc-400">
+                        <span>¿Ya tienes una cuenta?</span>
+                        <a class="hover:text-red-400" href="./login.html">Ir al
+                            Inicio de Sesión</a>
+                    </div>
+
+                </form>
+            </section>
+        </main>
+
+        <script src="../JS/API/auth.js"></script>
+        <script src="../JS/auth.js"></script>
+    </body>
+</html>

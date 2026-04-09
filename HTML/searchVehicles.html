@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TicoAutos | Buscar Vehículos</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../css/searchVehicles.css" />
+</head>
+<body class="bg-black text-white min-h-screen">
+
+  <!-- Header -->
+  <header class="sticky top-0 z-50 border-b border-zinc-800 bg-black/85 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-4 py-4">
+
+      <div class="flex items-center justify-between gap-4 flex-wrap">
+        <div class="flex items-center gap-3">
+          <img src="../img/ticoautos-logo.png" alt="Logo TicoAutos" class="w-28 h-auto" />
+          <div>
+            <h1 class="text-2xl md:text-3xl font-bold tracking-wide">
+              <span class="text-red-500">Buscar</span> Vehículos
+            </h1>
+            <p class="text-sm text-zinc-400">Encontrá el carro ideal para vos</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <a href="./index.html"
+            class="px-4 py-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 transition font-semibold">
+            Volver
+          </a>
+
+          <button id="toggleFiltersBtn" type="button"
+            class="flex items-center gap-2 px-5 py-3 rounded-xl bg-red-600 hover:bg-red-500 transition font-semibold shadow-lg shadow-red-900/20">
+            <span>Filtros</span>
+            <span id="filterArrow" class="arrow-transition">▼</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+      <div id="filtersPanel" class="filters-panel mt-4">
+        <form id="filterForm" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+
+          <div>
+            <label class="block text-sm text-zinc-300 mb-1">Marca</label>
+            <input class="input-dark" type="text" id="brand" placeholder="Ej: Toyota" />
+          </div>
+
+          <div>
+            <label class="block text-sm text-zinc-300 mb-1">Modelo</label>
+            <input class="input-dark" type="text" id="model" placeholder="Ej: Corolla" />
+          </div>
+
+          <div>
+            <label class="block text-sm text-zinc-300 mb-1">Año mínimo</label>
+            <input class="input-dark" type="number" id="minYear" placeholder="Ej: 2018" />
+          </div>
+
+          <div>
+            <label class="block text-sm text-zinc-300 mb-1">Año máximo</label>
+            <input class="input-dark" type="number" id="maxYear" placeholder="Ej: 2024" />
+          </div>
+
+          <div>
+            <label class="block text-sm text-zinc-300 mb-1">Precio mínimo</label>
+            <input class="input-dark" type="number" id="minPrice" placeholder="Ej: 5000" />
+          </div>
+
+          <div>
+            <label class="block text-sm text-zinc-300 mb-1">Precio máximo</label>
+            <input class="input-dark" type="number" id="maxPrice" placeholder="Ej: 20000" />
+          </div>
+
+          <div>
+            <label class="block text-sm text-zinc-300 mb-1">Estado</label>
+            <select class="input-dark" id="status">
+              <option value="">Todos</option>
+              <option value="Disponible">Disponible</option>
+              <option value="Vendido">Vendido</option>
+            </select>
+          </div>
+
+          <div class="flex items-end gap-3">
+            <button type="submit"
+              class="w-full px-5 py-3 rounded-xl bg-red-600 hover:bg-red-500 transition font-semibold">
+              Buscar
+            </button>
+
+            <button type="button" id="clearBtn"
+              class="w-full px-5 py-3 rounded-xl bg-zinc-800 hover:bg-zinc-700 transition font-semibold">
+              Limpiar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="max-w-7xl mx-auto px-4 py-8">
+    <div class="flex items-center justify-between mb-6 flex-wrap gap-3">
+      <p id="resultsInfo" class="text-zinc-400">Mostrando vehículos destacados</p>
+      <p class="text-sm text-zinc-500">Haz clic en un vehículo para ver más detalles</p>
+    </div>
+
+    <section id="vehiclesContainer" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"></section>
+    <div class="mt-8 flex items-center justify-center gap-4">
+        <button id="prevBtn" class="px-4 py-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 transition font-semibold">
+          Anterior
+        </button>
+
+        <span id="pageInfo" class="text-zinc-300">Página 1 de 1</span>
+
+        <button id="nextBtn" class="px-4 py-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 transition font-semibold">
+          Siguiente
+        </button>
+    </div>
+  </main>
+
+  <script src="../JS/API/searchVehicles.js"></script>
+<script src="../JS/searchVehicles.js"></script>
+</body>
+</html>
