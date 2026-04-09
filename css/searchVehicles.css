@@ -1,0 +1,147 @@
+html, body {
+  background: #000;
+}
+
+.filters-panel {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: max-height 0.4s ease, opacity 0.3s ease, transform 0.3s ease;
+}
+
+.filters-panel.open {
+  max-height: 500px;
+  opacity: 1;
+  transform: translateY(0);
+  padding: 18px;
+  background: linear-gradient(180deg, rgba(24,24,27,0.95), rgba(10,10,10,0.95));
+  border: 1px solid #27272a;
+  border-radius: 20px;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.35);
+}
+
+.arrow-transition {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.arrow-transition.rotate {
+  transform: rotate(180deg);
+}
+
+/* Inputs */
+.input-dark {
+  width: 100%;
+  background: #09090b;
+  border: 1px solid #27272a;
+  color: white;
+  border-radius: 14px;
+  padding: 12px 14px;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.input-dark:focus {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+}
+
+/* Card */
+.vehicle-card {
+  background: linear-gradient(180deg, #18181b 0%, #111111 100%);
+  border: 1px solid #27272a;
+  border-radius: 22px;
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.55);
+}
+
+.vehicle-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(239, 68, 68, 0.6);
+  box-shadow: 0 30px 70px rgba(0,0,0,0.75);
+}
+
+.vehicle-image-wrap {
+  position: relative;
+  overflow: hidden;
+}
+
+.vehicle-image-wrap img {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  transition: transform 0.35s ease;
+  display: block;
+}
+
+.vehicle-card:hover img {
+  transform: scale(1.05);
+}
+
+.status-badge {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  backdrop-filter: blur(6px);
+}
+
+.status-badge.vendido {
+  background: rgba(34, 197, 94, 0.15);
+  color: #86efac;
+  border: 1px solid rgba(34, 197, 94, 0.4);
+}
+
+.status-badge.vendido {
+  background: rgba(239, 68, 68, 0.15);
+  color: #fca5a5;
+  border: 1px solid rgba(239, 68, 68, 0.4);
+}
+
+.spec-pill {
+  border: 1px solid #3f3f46;
+  background: #09090b;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+}
+
+/* Animación entrada */
+.fade-up {
+  opacity: 0;
+  transform: translateY(18px);
+  animation: fadeUp 0.65s ease forwards;
+}
+
+.fade-up:nth-child(2) {
+  animation-delay: 0.08s;
+}
+
+.fade-up:nth-child(3) {
+  animation-delay: 0.16s;
+}
+
+.fade-up:nth-child(4) {
+  animation-delay: 0.24s;
+}
+
+.fade-up:nth-child(5) {
+  animation-delay: 0.32s;
+}
+
+.fade-up:nth-child(6) {
+  animation-delay: 0.40s;
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
