@@ -93,6 +93,35 @@ html, body{
   color: #bbf7d0;
 }
 
+.google-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: white;
+  color: #444;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.google-btn:hover {
+  background: #f1f1f1;
+}
+
+.google-btn img {
+  width: 20px;
+}
+
+.hidden {
+  display: none;
+}
+
+#googleBtn {
+  margin-top: 20px;
+}
+
 @keyframes popIn {
   from { opacity: 0; transform: translateY(14px) scale(0.98); }
   to   { opacity: 1; transform: translateY(0) scale(1); }
