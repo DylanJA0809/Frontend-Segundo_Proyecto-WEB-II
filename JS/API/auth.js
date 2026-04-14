@@ -1,7 +1,7 @@
-const API = "http://localhost:3000";
+const APIbaseUrl = "http://localhost:3000";
 
 async function loginUser(email, password) {
-  const response = await fetch(API + "/auth/token", {
+  const response = await fetch(APIbaseUrl + "/auth/token", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -19,7 +19,7 @@ async function loginUser(email, password) {
 }
 
 async function registerUser(userData) {
-  const response = await fetch(API + "/api/user", {
+  const response = await fetch(APIbaseUrl + "/api/user", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
