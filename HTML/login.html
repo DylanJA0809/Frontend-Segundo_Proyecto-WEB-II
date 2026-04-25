@@ -58,6 +58,24 @@
         Al continuar, aceptas nuestros Términos y Política de Privacidad.
       </p>
     </section>
+
+    <div id="pendingModal" class="modal hidden">
+      <div class="modal-content">
+        <h2 style="color: #e53e3e;">Cuenta pendiente</h2>
+        <p style="color: #a1a1aa; margin: 12px 0;">
+          Tu cuenta aún no ha sido activada. 
+          Revisa tu correo y haz click en el link de activación.
+        </p>
+        <button id="resendBtn"
+          class="w-full rounded-2xl bg-red-600 hover:bg-red-500 transition px-4 py-3 font-semibold mt-2">
+          Reenviar correo
+        </button>
+        <button id="activateLaterBtn"
+          class="w-full rounded-2xl border border-zinc-600 hover:border-zinc-400 transition px-4 py-3 font-semibold mt-2 text-zinc-400">
+          Activar más tarde
+        </button>
+      </div>
+    </div>
   </main>
 
   <script src="https://accounts.google.com/gsi/client"></script>
