@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const msgBox = document.getElementById("msgBox");
   const card = document.getElementById("authCard");
   const btn = document.getElementById("submitBtn");
+  const pendingModal = document.getElementById("pendingModal");
 
   if (!form) return;
 
@@ -20,9 +21,46 @@ document.addEventListener("DOMContentLoaded", () => {
   function isValidEmail(email) {
     return /^\S+@\S+\.\S+$/.test(email);
   }
+
+  function showPendingModal() {
+    alert("showPendingModal llamado, pendingModal: " + (pendingModal ? "ENCONTRADO" : "NULL"));
+     if (pendingModal) pendingModal.classList.remove("hidden");
+  }
+
+  const activateLaterBtn = document.getElementById("activateLaterBtn");
+  if (activateLaterBtn) {
+    activateLaterBtn.addEventListener("click", () => {
+      pendingModal.classList.add("hidden");
+    });
+  }
+
+  const goToLoginBtn = document.getElementById("goToLoginBtn");
+  if (goToLoginBtn) {
+    goToLoginBtn.addEventListener("click", () => {
+      window.location.href = "../HTML/login.html";
+    });
+  }
+
+  const resendBtn = document.getElementById("resendBtn");
+  if (resendBtn) {
+    resendBtn.addEventListener("click", async () => {
+      const emailInput = form.querySelector('input[type="email"]');
+      if (!emailInput || !emailInput.value) {
+        showMessage("error", "Ingresa tu correo primero.");
+        return;
+      }
+      try {
+        await resendActivationEmail(emailInput.value.trim());
+        showMessage("success", "Correo reenviado, revisa tu bandeja.");
+        pendingModal.classList.add("hidden");
+      } catch (error) {
+        showMessage("error", error.message);
+      }
+    });
+  }
   
   // Autocompletar desde padrón
-  const cedulaInput = document.getElementById('id_number');
+  /*const cedulaInput = document.getElementById('id_number');
   const nameInput = document.getElementById('name');
   const lastNameInput = document.getElementById('last_name');
 
@@ -45,7 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
         showMessage("error", error.message);
       }
     });
-  }
+  }*/
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -94,14 +132,10 @@ document.addEventListener("DOMContentLoaded", () => {
           email: form.email.value.trim(),
           password: form.password.value.trim(),
         };
-
+        
         await registerUser(userData);
 
-        showMessage("success", "Registro exitoso, ya puedes iniciar sesión.");
-
-        setTimeout(() => {
-          window.location.href = "../HTML/login.html";
-        }, 900);
+        showPendingModal();
 
       } else {
         // LOGIN
@@ -123,13 +157,18 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
     } catch (error) {
-      showMessage("error", error.message);
-      shake();
-    } finally {
-      if (btn) {
-        btn.disabled = false;
-        btn.textContent = oldText || "Enviar";
+      if (error.pending) {
+        showPendingModal();
+      } else {
+        showMessage("error", error.message);
+        shake();
       }
+   } finally {
+    if (btn) {
+      alert("finally ejecutado, oldText:", oldText);
+      btn.disabled = false;
+      btn.textContent = oldText || "Enviar"; 
     }
+  }
   });
 });
