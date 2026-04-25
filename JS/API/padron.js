@@ -1,4 +1,4 @@
-const API_Padron = "http://localhost:3000";
+/*const API_Padron = "http://localhost:3000";
 
 async function getPadronByCedula(cedula) {
   const response = await fetch(`${API_Padron}/api/padron/${cedula}`, {
@@ -23,4 +23,4 @@ async function getPadronByCedula(cedula) {
 }
 
 // queda global para poder usarlo en auth.js sin problemas de importación
-window.getPadronByCedula = getPadronByCedula;
+window.getPadronByCedula = getPadronByCedula;*/
