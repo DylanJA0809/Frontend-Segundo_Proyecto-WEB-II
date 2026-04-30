@@ -76,8 +76,36 @@
         </button>
       </div>
     </div>
+    <div id="idModal" class="modal hidden">     <!-- ID number modal for new Google users -->
+      <div class="modal-content pop-in">
+        <div class="logo-wrap" style="justify-content: center; margin-bottom: 1.2rem;">
+          <img class="logo-img" src="../img/ticoautos-logo.png" alt="TicoAutos Logo"
+            style="width: 56px; padding: 8px;" />
+        </div>
+        <h2 style="color: #e53e3e; font-size: 1.2rem; font-weight: 700;">Un último paso</h2>
+        <p style="color: #a1a1aa; margin: 10px 0 20px;">
+          Para completar tu perfil, ingresá tu número de cédula.
+        </p>
+        <div class="space-y-1" style="text-align: left;">
+          <label style="font-size: 0.85rem; color: #d4d4d8;">Número de cédula</label>
+          <input
+            id="idNumber"
+            class="input-dark"
+            type="text"
+            placeholder="Ej: 208656789"
+            autocomplete="off"
+          />
+          <p id="cedulaError" class="msg" style="margin-top: 8px;"></p>
+        </div>
+        <button id="saveProfileBtn"
+          class="w-full rounded-2xl bg-red-600 hover:bg-red-500 transition px-4 py-3 font-semibold mt-4">
+          Guardar y continuar
+        </button>
+      </div>
+    </div>
   </main>
 
+  <script src="../JS/config.js"></script>
   <script src="https://accounts.google.com/gsi/client"></script>
   <script src="../JS/API/authGoogle.js"></script>
   <script src="../JS/API/auth.js"></script>
