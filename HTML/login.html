@@ -76,6 +76,33 @@
         </button>
       </div>
     </div>
+
+    <!-- Modal 2FA -->
+    <div id="twoFAModal" class="modal hidden">
+      <div class="modal-content">
+        <h2 style="color: #e53e3e;">Verificación en dos pasos</h2>
+        <p style="color: #a1a1aa; margin: 12px 0;">
+          Te enviamos un código de 6 dígitos a tu número de teléfono. Ingrésalo para continuar.
+        </p>
+        <div class="space-y-1" style="text-align: left;">
+          <label style="font-size: 0.85rem; color: #d4d4d8;">Código de verificación</label>
+          <input
+            id="twoFACode"
+            class="input-dark"
+            type="text"
+            maxlength="6"
+            placeholder="123456"
+            autocomplete="off"
+          />
+        </div>
+        <div id="twoFAMsg" class="msg" style="margin-top: 8px;"></div>
+        <button id="verify2FABtn"
+          class="w-full rounded-2xl bg-red-600 hover:bg-red-500 transition px-4 py-3 font-semibold mt-4">
+          Verificar
+        </button>
+      </div>
+    </div>
+
     <div id="idModal" class="modal hidden">     <!-- ID number modal for new Google users -->
       <div class="modal-content pop-in">
         <div class="logo-wrap" style="justify-content: center; margin-bottom: 1.2rem;">
