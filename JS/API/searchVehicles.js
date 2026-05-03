@@ -1,25 +1,69 @@
-const API = "http://localhost:3000/api/vehicle";
+const GRAPH_API = "http://localhost:4000/graphql";
 
 async function getVehicles(filters) {
-  const params = new URLSearchParams();
+  const response = await fetch(GRAPH_API, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      query: `query GetVehicles(
+        $brand: String
+        $model: String
+        $status: String
+        $minYear: Int
+        $maxYear: Int
+        $minPrice: Float
+        $maxPrice: Float
+        $page: Int
+        $limit: Int
+      ) {
+        vehicles(
+          brand: $brand
+          model: $model
+          status: $status
+          minYear: $minYear
+          maxYear: $maxYear
+          minPrice: $minPrice
+          maxPrice: $maxPrice
+          page: $page
+          limit: $limit
+        ) {
+          total
+          page
+          totalPages
+          results {
+            id
+            brand
+            model
+            description
+            year
+            price
+            image_path
+            status
+            createdAt
+          }
+        }
+      }`,
+      variables: {
+        brand: filters.brand || null,
+        model: filters.model || null,
+        status: filters.status || null,
+        minYear: filters.minYear ? parseInt(filters.minYear) : null,
+        maxYear: filters.maxYear ? parseInt(filters.maxYear) : null,
+        minPrice: filters.minPrice ? parseFloat(filters.minPrice) : null,
+        maxPrice: filters.maxPrice ? parseFloat(filters.maxPrice) : null,
+        page: filters.page ? parseInt(filters.page) : 1,
+        limit: filters.limit ? parseInt(filters.limit) : 10
+      }
+    })
+  });
 
-  if (filters.brand) params.append("brand", filters.brand);
-  if (filters.model) params.append("model", filters.model);
-  if (filters.status) params.append("status", filters.status);
-  if (filters.minYear) params.append("minYear", filters.minYear);
-  if (filters.maxYear) params.append("maxYear", filters.maxYear);
-  if (filters.minPrice) params.append("minPrice", filters.minPrice);
-  if (filters.maxPrice) params.append("maxPrice", filters.maxPrice);
+  const { data, errors } = await response.json();
 
-  params.append("page", filters.page);
-  params.append("limit", filters.limit);
-
-  const response = await fetch(`${API}?${params.toString()}`);
-  const data = await response.json();
-
-  if (!response.ok) {
-    throw new Error("No se pudieron cargar los vehículos.");
+  if (errors) {
+    throw new Error(errors[0].message || "No se pudieron cargar los vehículos.");
   }
 
-  return data;
+  return data.vehicles;
 }
