@@ -75,6 +75,15 @@
                         </div>
                     </div>
 
+                    <div class="space-y-1">
+                        <label class="text-sm text-zinc-300">Teléfono</label>
+                        <input class="input-dark" type="tel" name="phone" id="phone"
+                            required placeholder="+50688887777" />
+                        <p class="text-xs text-zinc-500">
+                            Ingrese su número con código de país (ej: +506 para Costa Rica). Se usará para verificación en dos pasos.
+                        </p>
+                    </div>
+
                     <button id="submitBtn"
                         class="w-full rounded-2xl bg-red-600 hover:bg-red-500 transition px-4 py-3 font-semibold">
                         Crear Cuenta
@@ -108,6 +117,7 @@
             </div>
         </main>
         <script src="../JS/API/auth.js"></script>
+        <script src="../JS/API/padron.js"></script>
         <script src="../JS/auth.js"></script>
     </body>
 </html>
