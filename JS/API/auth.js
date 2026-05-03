@@ -18,10 +18,28 @@ async function loginUser(email, password) {
   }
 
   if (!response.ok) {
-    throw new Error("Falló al inciar sesión, intente de nuevo");
+    throw new Error(data.message || "Falló al iniciar sesión, intente de nuevo");
   }
 
-  return data; 
+  return data;
+}
+
+async function verify2FA(email, code) {
+  const response = await fetch(APIbaseUrl + "/auth/verify-2fa", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ email, code })
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.message || "Código de verificación incorrecto.");
+  }
+
+  return data;
 }
 
 async function registerUser(userData) {
@@ -36,7 +54,7 @@ async function registerUser(userData) {
   const data = await response.json();
 
   if (!response.ok) {
-    throw new Error("Falló al registrarse, intente de nuevo");
+    throw new Error(data.message || "Falló al registrarse, intente de nuevo");
   }
 
   return data;
