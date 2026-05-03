@@ -1,28 +1,65 @@
 const API = "http://localhost:3000";
+const GRAPH_API = "http://localhost:4000/graphql";
 
 async function getCurrentUser(token) {
-  const response = await fetch(API + "/api/auth/user", {
+  const response = await fetch(GRAPH_API, {
+    method: "POST",
     headers: {
+      "Content-Type": "application/json",
       Authorization: `Bearer ${token}`
-    }
+    },
+    body: JSON.stringify({
+      query: `query {
+        me {
+          id
+          name
+          last_name
+          email
+          id_number
+          status
+        }
+      }`
+    })
   });
 
-  const data = await response.json().catch(() => ({}));
+  const { data, errors } = await response.json();
 
-  if (!response.ok) {
-    throw new Error(data.message || "No se pudo obtener el usuario.");
+  if (errors) {
+    throw new Error(errors[0].message || "No se pudo obtener el usuario.");
   }
 
-  return data;
+  return data.me;
 }
 
-async function getAllVehicles() {
-  const response = await fetch(API + "/api/vehicle");
-  const data = await response.json().catch(() => ({}));
+async function getAllVehicles(token) {
+  const response = await fetch(GRAPH_API, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`
+    },
+    body: JSON.stringify({
+      query: `query {
+        vehiclesByUser {
+          id
+          brand
+          model
+          description
+          year
+          price
+          image_path
+          status
+          createdAt
+        }
+      }`
+    })
+  });
 
-  if (!response.ok) {
-    throw new Error("No se pudieron cargar los vehículos.");
+  const { data, errors } = await response.json();
+
+  if (errors) {
+    throw new Error(errors[0].message || "No se pudieron cargar los vehículos.");
   }
 
-  return data;
+  return data.vehiclesByUser;
 }
