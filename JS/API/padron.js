@@ -1,26 +1,23 @@
-/*const API_Padron = "http://localhost:3000";
+const API_Padron = "http://localhost:3000";
 
 async function getPadronByCedula(cedula) {
-  const response = await fetch(`${API_Padron}/api/padron/${cedula}`, {
+  const response = await fetch(`${API_Padron}/api/cedula/${cedula}`, {
     method: "GET",
     headers: { "Content-Type": "application/json" }
   });
 
-  // Primero revisa el status
   if (!response.ok) {
-    // Intentar extraer mensaje del backend
-    let errorMessage = "Cédula no encontrada en el padrón";
+    let errorMessage = "Cédula no encontrada en el padrón electoral.";
     try {
       const errorData = await response.json();
-      if (errorData && errorData.error) errorMessage = errorData.error;
+      if (errorData && errorData.message) errorMessage = errorData.message;
     } catch (e) { }
     throw new Error(errorMessage);
   }
 
-  // Parsear la respuesta real
   const data = await response.json();
   return data;
 }
 
 // queda global para poder usarlo en auth.js sin problemas de importación
-window.getPadronByCedula = getPadronByCedula;*/
+window.getPadronByCedula = getPadronByCedula;
