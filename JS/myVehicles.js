@@ -12,24 +12,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     try {
-      const userData = await getCurrentUser(token);
-      const user = userData.user || userData;
-      const userId = user._id || user.id || "";
+      const vehicles = await getAllVehicles(token);
 
-      if (!userId) {
-        showError("No se pudo identificar el usuario.");
-        return;
-      }
-
-      const vehiclesData = await getAllVehicles();
-      const vehicles = vehiclesData.results || [];
-
-      const myVehicles = vehicles.filter(vehicle => {
-        const ownerId = vehicle.id_user?._id || vehicle.id_user;
-        return String(ownerId) === String(userId);
-      });
-
-      showVehicles(myVehicles);
+      showVehicles(vehicles);
     } catch (error) {
       showError(error.message);
     }
@@ -110,7 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <div class="mt-5">
             <button
               class="manageBtn w-full py-3 rounded-xl bg-zinc-800 hover:bg-red-600 transition font-semibold"
-              data-id="${vehicle._id}">
+              data-id="${vehicle.id}">
               Administrar vehículo
             </button>
           </div>
