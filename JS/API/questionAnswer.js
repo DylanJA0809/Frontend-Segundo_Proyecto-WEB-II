@@ -1,20 +1,48 @@
+const GRAPH_API = "http://localhost:4000/graphql";
 const QUESTION_API = "http://localhost:3000/api/question";
 const ANSWER_API = "http://localhost:3000/api/answer";
 
 async function getQuestionsByVehicle(id, token) {
-  const res = await fetch(`${QUESTION_API}?id_vehicle=${id}`, {
+  const response = await fetch(GRAPH_API, {
+    method: "POST",
     headers: {
+      "Content-Type": "application/json",
       Authorization: `Bearer ${token}`
-    }
+    },
+    body: JSON.stringify({
+      query: `query GetQuestionsByVehicle($id_vehicle: ID!) {
+        questionsByVehicle(id_vehicle: $id_vehicle) {
+          id
+          message
+          created_at
+          user {
+            id
+            name
+            last_name
+          }
+          answer {
+            id
+            message
+            created_at
+            user {
+              id
+              name
+              last_name
+            }
+          }
+        }
+      }`,
+      variables: { id_vehicle: id }
+    })
   });
 
-  const data = await res.json().catch(() => ([]));
+  const { data, errors } = await response.json();
 
-  if (!res.ok) {
-    throw new Error("No se pudieron cargar las conversaciones.");
+  if (errors) {
+    throw new Error(errors[0].message || "No se pudieron cargar las conversaciones.");
   }
 
-  return data;
+  return data.questionsByVehicle;
 }
 
 async function createQuestion(data, token) {
@@ -31,7 +59,6 @@ async function createQuestion(data, token) {
     if (res.status === 409) {
       throw new Error("Debes esperar a que respondan tu pregunta actual antes de volver a preguntar.");
     }
-
     throw new Error("No se pudo enviar la pregunta.");
   }
 
@@ -39,19 +66,36 @@ async function createQuestion(data, token) {
 }
 
 async function getAnswersByQuestion(id, token) {
-  const res = await fetch(`${ANSWER_API}?id_question=${id}`, {
+  const response = await fetch(GRAPH_API, {
+    method: "POST",
     headers: {
+      "Content-Type": "application/json",
       Authorization: `Bearer ${token}`
-    }
+    },
+    body: JSON.stringify({
+      query: `query GetAnswersByQuestion($id_question: ID!) {
+        answersByQuestion(id_question: $id_question) {
+          id
+          message
+          created_at
+          user {
+            id
+            name
+            last_name
+          }
+        }
+      }`,
+      variables: { id_question: id }
+    })
   });
 
-  const data = await res.json().catch(() => ([]));
+  const { data, errors } = await response.json();
 
-  if (!res.ok) {
-    throw new Error("No se pudieron cargar las respuestas.");
+  if (errors) {
+    throw new Error(errors[0].message || "No se pudieron cargar las respuestas.");
   }
 
-  return data;
+  return data.answersByQuestion;
 }
 
 async function createAnswer(data, token) {
@@ -68,7 +112,6 @@ async function createAnswer(data, token) {
     if (res.status === 409) {
       throw new Error("Esta pregunta ya fue respondida.");
     }
-
     throw new Error("No se pudo enviar la respuesta.");
   }
 
