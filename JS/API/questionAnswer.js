@@ -1,4 +1,4 @@
-const GRAPH_API = "http://localhost:4000/graphql";
+const GRAPHAPI = "http://localhost:4000/graphql";
 const QUESTION_API = "http://localhost:3000/api/question";
 const ANSWER_API = "http://localhost:3000/api/answer";
 
@@ -59,8 +59,12 @@ async function createQuestion(data, token) {
     if (res.status === 409) {
       throw new Error("Debes esperar a que respondan tu pregunta actual antes de volver a preguntar.");
     }
-    throw new Error("No se pudo enviar la pregunta.");
-  }
+      if (res.status === 400) {
+        const body = await res.json();
+        throw new Error(body.message || "Mensaje inválido.");
+      }
+      throw new Error("No se pudo enviar la pregunta.");
+    }
 
   return await res.json();
 }
@@ -111,6 +115,10 @@ async function createAnswer(data, token) {
   if (!res.ok) {
     if (res.status === 409) {
       throw new Error("Esta pregunta ya fue respondida.");
+    }
+    if (res.status === 400) {
+      const body = await res.json();
+      throw new Error(body.message || "Mensaje inválido.");
     }
     throw new Error("No se pudo enviar la respuesta.");
   }
