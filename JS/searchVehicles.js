@@ -158,7 +158,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const description = getShortDescription(vehicle.description);
 
     return `
-      <article class="vehicle-card fade-up cursor-pointer" data-id="${vehicle._id}">
+      <article class="vehicle-card fade-up cursor-pointer" data-id="${vehicle.id}">
         <div class="vehicle-image-wrap">
           <img 
             src="${image}" 
