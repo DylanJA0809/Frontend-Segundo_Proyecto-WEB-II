@@ -30,18 +30,44 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   );
 
-  document.getElementById("saveProfileBtn").addEventListener("click", async () => {
-    const id_number = document.getElementById("idNumber").value;
+   document.getElementById("saveProfileBtn").addEventListener("click", async () => {
+    const id_number = document.getElementById("idNumber").value.trim();
+    const errorBox = document.getElementById("cedulaError");
+    const btn = document.getElementById("saveProfileBtn");
+
     if (!id_number) {
-      alert("Por favor ingresa tu cédula!");
+      errorBox.style.display = "block";
+      errorBox.textContent = "La cédula es obligatoria.";
+      errorBox.style.color = "#f87171";
       return;
     }
+
+    errorBox.textContent = "";
+    errorBox.style.display = "none";
+    btn.disabled = true;
+    btn.textContent = "Verificando...";
+
+    try {
+      await getPadronByCedula(id_number); // validate cedula exists in padron
+    } catch (err) {
+      errorBox.style.display = "block";
+      errorBox.textContent = "La cédula no está registrada en el padrón electoral.";
+      errorBox.style.color = "#f87171";
+      btn.disabled = false;
+      btn.textContent = "Guardar y continuar";
+      return;
+    }
+
     try {
       const token = sessionStorage.getItem("token");
       await completeProfile({ id_number }, token);
       window.location.href = "../HTML/index.html";
     } catch (err) {
-      alert("No se pudo guardar la cédula, Intenta de nuevo!");
+      errorBox.style.display = "block";
+      errorBox.textContent = "No se pudo guardar la cédula, intenta de nuevo.";
+      errorBox.style.color = "#f87171";
+      btn.disabled = false;
+      btn.textContent = "Guardar y continuar";
     }
   });
 });
