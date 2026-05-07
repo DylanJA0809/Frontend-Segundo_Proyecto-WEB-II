@@ -17,10 +17,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     try {
-      const data = await getVehicleById(id);
-
-      const vehicle = data.vehicle;
-      const owner = data.owner;
+      const vehicle = await getVehicleById(id);
+      const owner = vehicle.owner;
 
       showVehicle(vehicle, owner);
 
@@ -28,9 +26,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (token) {
         const userData = await getCurrentUser(token);
-        currentUser = userData.user || userData;
+        currentUser = userData;
 
-        loadQuestions(vehicle._id);
+        loadQuestions(vehicle.id);
       } else {
         showQuestionLoginMessage();
       }
@@ -217,8 +215,8 @@ document.addEventListener("DOMContentLoaded", () => {
       let hasPendingQuestion = false;
 
       for (const q of questions) {
-        const answers = await getAnswersByQuestion(q._id, token);
-        const askerName = getFullName(q.id_user);
+        const answers = await getAnswersByQuestion(q.id, token);
+        const askerName = getFullName(q.user);
 
         if (!isOwner() && answers.length === 0) {
           hasPendingQuestion = true;
@@ -231,19 +229,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
             ${answers.map(a => `
               <div class="answer-box">
-                <p class="text-sm text-zinc-400">${getFullName(a.id_user)}</p>
+                <p class="text-sm text-zinc-400">${getFullName(a.user)}</p>
                 <p class="text-white">${a.message}</p>
               </div>
             `).join("")}
 
             ${isOwner() && answers.length === 0 ? `
               <textarea
-                data-id="${q._id}"
+                data-id="${q.id}"
                 class="answerInput w-full mt-3 bg-zinc-900 border border-zinc-700 rounded-xl p-2 text-white"
                 placeholder="Responder..."></textarea>
 
               <button
-                data-id="${q._id}"
+                data-id="${q.id}"
                 class="sendAnswerBtn mt-2 px-3 py-2 bg-zinc-700 hover:bg-zinc-600 rounded-xl font-semibold">
                 Responder
               </button>
@@ -294,16 +292,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
       try {
         await createQuestion({
-          id_vehicle: currentVehicle._id,
+          id_vehicle: currentVehicle.id,
           message
         }, token);
 
         input.value = "";
         questionMessage.textContent = "";
-        loadQuestions(currentVehicle._id);
+        questionMessage.classList.remove("text-red-400");
+        loadQuestions(currentVehicle.id);
 
       } catch (err) {
         questionMessage.textContent = err.message;
+        questionMessage.classList.add("text-red-400");
       }
     }
   });
@@ -329,29 +329,32 @@ document.addEventListener("DOMContentLoaded", () => {
           }, token);
 
           questionMessage.textContent = "";
-          loadQuestions(currentVehicle._id);
+          questionMessage.classList.remove("text-red-400");
+          loadQuestions(currentVehicle.id);
 
         } catch (err) {
           questionMessage.textContent = err.message;
+          questionMessage.classList.add("text-red-400");
         }
       });
     });
   }
 
   async function getCurrentUser(token) {
-    const res = await fetch("http://localhost:3000/api/auth/user", {
+    const response = await fetch("http://localhost:4000/graphql", {
+      method: "POST",
       headers: {
+        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`
-      }
+      },
+      body: JSON.stringify({
+        query: `query { me { id name last_name email id_number } }`
+      })
     });
 
-    const data = await res.json().catch(() => ({}));
-
-    if (!res.ok) {
-      throw new Error("No se pudo obtener el usuario");
-    }
-
-    return data;
+    const { data, errors } = await response.json();
+    if (errors) throw new Error("No se pudo obtener el usuario");
+    return data.me;
   }
 
   function getFullName(user) {
@@ -370,8 +373,8 @@ document.addEventListener("DOMContentLoaded", () => {
   function isOwner() {
     if (!currentUser || !currentVehicle) return false;
 
-    const ownerId = currentVehicle.id_user?._id || currentVehicle.id_user;
-    return String(ownerId) === String(currentUser._id);
+    const ownerId = currentVehicle.owner?.id
+    return String(ownerId) === String(currentUser.id);
   }
 
   function showQuestionLoginMessage() {
